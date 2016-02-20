@@ -11,20 +11,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav id="nav">
+        <div>
+            <ul>
+                <li><a class='active' href="index.php">Гостевая книга</a></li>
+                <li><a href="admin.php">Админ панель</a></li>
+            </ul>
+        </div>
+    </nav>
     <article id="article">
-        <h1>Гостевая книга</h1>
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+            <h1>Гостевая книга</h1>
             <input id="login" type="text" name="userName" placeholder="Введите свое Имя">
             <textarea id="pass" name="userMessage" cols="40" rows="3" placeholder="Оставьте свой коментарий"></textarea>
             <input id="submit-button" type="submit" name="submit" value="Отправка">
         </form>
-        <div id="window-messages">
+
 
             <?php
-
             $messages = getContent(DB);
-            $messages = addContent(DB, $messages);
-            showContent($messages);
+            if (is_array($messagesNew = addContent(DB, $messages))){
+                showContent($messagesNew);
+            }  else {
+                showContent($messages, $messagesNew);
+            }
 
             ?>
         </div>
