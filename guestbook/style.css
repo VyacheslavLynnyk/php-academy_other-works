@@ -1,0 +1,79 @@
+#article {
+    width:70%;
+    max-width: 960px;
+    margin: auto;
+}
+form {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}
+input, textarea {
+    margin: 5px;
+    display: inline-block;
+    width: 50%;
+    min-width: 200px;
+
+}
+#submit-button {
+    box-sizing: content-box;
+    width: calc(50% - 10px);
+    height: 40px;
+    margin-bottom: 30px;
+}
+#window-messages {
+    position: relative;
+    float: left;
+    width: 100%;
+    min-width: 400px;
+    height: 70vh;
+    margin: auto;
+    padding: 15px;
+    border-radius: 20px 0 0 20px;
+    border: 2px solid #white;
+    box-shadow: 0 0 10px #33aaaa;
+    overflow-y: scroll;
+}
+
+.message {
+    display: table;
+    padding: 10px;
+    margin: 5px;
+
+    width: 70%;
+    vertical-align: middle;
+}
+.message p {
+    display: table-cell;
+    vertical-align: middle;
+}
+.text {
+
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+.message:nth-child(odd) {
+    float: left;
+}
+.message > p:nth-child(2){
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.message:nth-child(odd) > .text {
+    text-align: left;
+}
+
+.message:nth-child(even) {
+    float: right;
+}
+.message:nth-child(even) > p:last-child {
+    width: auto;
+}
+
+.message:nth-child(odd) .text {
+    background: #70a0f0;
+}
+.message:nth-child(even) .text {
+    background: orange;
+}
