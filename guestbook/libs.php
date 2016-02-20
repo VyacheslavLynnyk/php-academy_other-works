@@ -48,8 +48,9 @@ function showContent($messages, $alert = '')
         <?php
         foreach ($messages as $post) {
             foreach ($cens as $word) {
-                $post['userName'] = str_ireplace($word, "*CENSORED*", ($post['userName']));
-                $post['userMessage'] = str_ireplace($word, "*CENSORED*", $post['userMessage']);
+                $post['userName'] = preg_replace("|$word|ius", "*CENSORED*", ($post['userName']));
+                $post['userMessage'] = preg_replace("|$word|ius", "*CENSORED*", $post['userMessage']);
+
             }
             $position = ++$messageCount % 2;
             ?>
@@ -69,8 +70,6 @@ function showContent($messages, $alert = '')
 
             <?php
         }
-
-
     } else {
         if (!empty($alert)) : ?>
             <div class="alert">
@@ -86,7 +85,10 @@ function addFilerWords($db, $filtersArr = [])
     if (isset($_POST['addWords'])) {
         if (!empty($_POST['words'])) {
             $filterStr = htmlspecialchars(mb_strtolower(trim($_POST['words'])));
-            $filterNew = explode(',', $filterStr);
+            $filterNewRaw = explode(',', $filterStr);
+            foreach($filterNewRaw as $word){
+                $filterNew[] = trim($word);
+            }
             $filtersArr = (is_array($filtersArr))? $filtersArr : [];
             $filtersArr = array_merge($filtersArr, $filterNew);
             $filterDB = serialize($filtersArr);
